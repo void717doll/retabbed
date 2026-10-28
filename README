@@ -1,0 +1,43 @@
+retabbed
+========
+tabbed 0.9 with the window grouping, mouse feedback, shortcuts, and fixes
+from jOS. the executable and X11 class remain tabbed for compatibility.
+
+build and install
+-----------------
+requires a c compiler, make, and the Xlib, Xft, and fontconfig headers and
+libraries. the checks also need address/undefined sanitizers and a linker
+supporting --wrap.
+
+    make
+    make check
+    make install
+
+the default prefix is /usr/local. override it with make PREFIX=/your/path
+or use DESTDIR for a staged installation. edit config.def.h for persistent
+configuration; a newer config.def.h overwrites config.h on the next build.
+
+usage
+-----
+run an application with XEmbed support:
+
+    tabbed surf -e
+    tabbed xterm -into
+
+group existing top-level X11 windows (replace these example ids):
+
+    tabbed -c -G 0x100001 -G 0x200001
+
+left-click selects a tab, middle-click closes it, and the wheel changes
+tabs. grouped tabs highlight on hover. ctrl+tab / ctrl+shift+tab cycle
+tabs; ctrl+F4 or ctrl+shift+w closes the selected tab. opening new tabs
+with ctrl+shift+t requires ordinary command-based mode.
+
+closing a grouped container requests closure of its selected application,
+including the final tab. detaching a tab returns it to the desktop. jOS's
+dwm supplies the group/detach shortcuts; this standalone repo contains
+the tabbed side of that integration.
+
+see tabbed(1) for all options and PATCHES.md for every local difference
+from the supplied tabbed 0.9 baseline, title behavior, integration details,
+and the limits of the automated checks. the original license is in LICENSE.
